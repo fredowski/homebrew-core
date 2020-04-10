@@ -13,6 +13,12 @@ class PkgConfig < Formula
     sha256 "b41d6ea88bfcacc5ce62bdf2ba97028ecc6864043875cfde9669125ba2af7d13" => :high_sierra
   end
 
+  def pour_bottle?
+    # The pc_path is hardcoded in the binary
+    reason "The bottle only works in the default /usr/local location."
+    satisfy { HOMEBREW_PREFIX.to_s == "/usr/local" }
+  end
+
   def install
     pc_path = %W[
       #{HOMEBREW_PREFIX}/lib/pkgconfig
